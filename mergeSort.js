@@ -19,4 +19,14 @@ function merge(arr1, arr2) {
   return res;
 }
 
-console.log(merge([1, 2, 14, 99], [50]));
+function mergeSort(arr) {
+  if (arr.length <= 1) return arr;
+  let middle = Math.floor(arr.length / 2);
+  return merge(
+    mergeSort(arr.slice(0, middle)),
+    mergeSort(arr.slice(middle))
+  );
+}
+
+
+console.log(mergeSort([1, -1, 3, -2]));
