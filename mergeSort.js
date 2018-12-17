@@ -29,4 +29,4 @@ function mergeSort(arr) {
 }
 
 
-console.log(mergeSort([1, -1, 3, -2]));
+console.log(mergeSort([1, -1, -2]));
