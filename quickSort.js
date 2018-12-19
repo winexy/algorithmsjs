@@ -1,11 +1,11 @@
 function quickSort(arr, left = 0, right = arr.length - 1) {
   if (left < right) {
-    let _pivot = pivot(arr, left, right);
+    let index = pivot(arr, left, right);
 
-    if (_pivot === left) return arr;
+    if (index === left) return arr;
     
-    quickSort(arr, left, _pivot - 1);
-    quickSort(arr, _pivot + 1, right);
+    quickSort(arr, left, index - 1);
+    quickSort(arr, index + 1, right);
   }
   return arr;
 
@@ -20,19 +20,19 @@ function quickSort(arr, left = 0, right = arr.length - 1) {
     swap(arr, counter, start);
 
     return counter;
+  }
 
-    function swap(arr, i, j) {
-      let temp = arr[i];
-      arr[i] = arr[j];
-      arr[j] = temp;
-    }
+  function swap(arr, i, j) {
+    let temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
   }
 }
 
  
 
 
-const arr = [4, 8, 2, 1, 5, 7, 6, 3]; 
+const arr = [4, 104, 14, 35, 12, 8, 2, 1, 99, -1, 5, 7, 6, 3, 2, 7]; 
 
 
 
