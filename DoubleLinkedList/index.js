@@ -1,4 +1,4 @@
-const DoubleLinkedList = require('./DoubleLinkedList');
+const DoubleLinkedList = require('./DoubleLinkedList').default;
 
 const list = new DoubleLinkedList();
 
