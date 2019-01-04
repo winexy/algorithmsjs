@@ -1,4 +1,4 @@
-const Node = require('./Node');
+const Node = require('../Node');
 
 class SingleLinkedList {
   constructor() {
@@ -27,12 +27,12 @@ class SingleLinkedList {
 
     let current = this.head;
     let prev = current
-    
+
     while (current.next) {
       prev = current;
       current = current.next
     }
-    
+
     this.tail = prev;
     this.tail.next = null;
     this.length--;
@@ -41,7 +41,7 @@ class SingleLinkedList {
       this.head = null;
       this.tail = null;
     }
-    
+
     return current;
   }
 
@@ -77,7 +77,7 @@ class SingleLinkedList {
   reverseIterator() {
     let list = new SingleLinkedList();
 
-    for (let value of this) 
+    for (let value of this)
       list.unshift(value);
 
     this.head = list.head;
@@ -86,7 +86,7 @@ class SingleLinkedList {
     return this;
   }
 
-  
+
   reverse() {
     let node = this.head;
     this.head = this.tail;
@@ -96,7 +96,7 @@ class SingleLinkedList {
     let prev = null;
 
     for (let i = 0; i < this.length; i++) {
-      next = node.next;  
+      next = node.next;
       node.next = prev;
       prev = node;
       node = next;
@@ -107,17 +107,17 @@ class SingleLinkedList {
 
 
   get(index) {
-    if (index < 0 || index >= this.length) 
+    if (index < 0 || index >= this.length)
       return null;
 
-    if (index === 0) 
+    if (index === 0)
       return this.head;
 
     let counter = 1;
     let node = this.head.next;
 
     while (node) {
-      if (counter === index) 
+      if (counter === index)
         return node;
       node = node.next;
       counter++;
@@ -134,16 +134,16 @@ class SingleLinkedList {
     return true;
   }
 
-  
+
   insert(index, value) {
     if (index < 0 || index > this.length) return false;
     if (index === 0) return !!this.unshift(value);
     if (index === this.length) return !!this.push(value);
-    
+
     const node = new Node(value);
     const prev = this.get(index - 1);
     const next = this.get(index);
-    
+
     node.next = next;
     prev.next = node;
     this.length++;
@@ -180,7 +180,7 @@ class SingleLinkedList {
         if (!done) {
           value = this.current.value;
           this.current = this.current.next;
-        } 
+        }
 
         return { done, value };
       }
