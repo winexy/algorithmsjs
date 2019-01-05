@@ -58,7 +58,6 @@ class BinarySearchTree {
 
 
   find(value) {
-    if (!this.root) return null;
     return this.__find__(value);
   }
 
