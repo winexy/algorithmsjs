@@ -34,20 +34,10 @@ class Queue {
     this.length--;
     return node.value;
   }
+
+  isEmpty() {
+    return this.first === null;
+  }
 }
 
-
-let q = new Queue();
-
-q.enquee(1);
-q.enquee(2);
-q.enquee(3);
-
-console.log(q);
-console.log(q.dequee());
-console.log(q.dequee());
-console.log(q.dequee());
-console.log(q);
-q.enquee(4);
-q.enquee(5);
-console.log(q);
+module.exports = Queue;
