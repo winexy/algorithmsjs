@@ -1,4 +1,7 @@
-const MaxBinaryHeap = function() {
+const Node = require('./Node');
+
+
+function PriorityQueue() {
   this.values = [];
 
   const getChildIndices = parent => (
@@ -8,11 +11,12 @@ const MaxBinaryHeap = function() {
     ]
   );
 
-
   const bubbleUp = (current = this.values.length - 1) => {
+
     const parent = Math.floor((current - 1) / 2);
 
-    if (this.values[parent] < this.values[current]) {
+    if (!this.values[parent]) return;
+    if (this.values[parent].priority > this.values[current].priority) {
       const temp = this.values[parent];
       this.values[parent] = this.values[current];
       this.values[current] = temp;
@@ -20,10 +24,11 @@ const MaxBinaryHeap = function() {
     }
   };
 
-
   const bubbleDown = (parentIndex = 0) => {
-    const notValidChild = (parent, child) => typeof child === 'undefined' || parent >= child;
-
+    const notValidChild = (parent, child) => {
+      // console.log({parent, child});
+      return typeof child === 'undefined' || parent.priority < child.priority;
+    };
     const [leftIndex, rightIndex] = getChildIndices(parentIndex);
     const parent = this.values[parentIndex];
     const left = this.values[leftIndex];
@@ -34,7 +39,7 @@ const MaxBinaryHeap = function() {
       notValidChild(parent, right)
     ) return;
 
-    const swapIndex = left < right ? rightIndex : leftIndex;
+    const swapIndex = right && left.priority > right.priority ? rightIndex : leftIndex;
 
     const temp = this.values[swapIndex];
     this.values[swapIndex] = this.values[parentIndex];
@@ -44,26 +49,37 @@ const MaxBinaryHeap = function() {
 
   };
 
+  return Object.entries({
+    get() {
+      return this.values
+        .map(node =>
+          `${node.value}:${node.priority}`
+        );
+    },
 
-  return {
-    get: () => [...this.values],
+    enqueue(value, priority) {
+      this.values.push(
+        new Node(value, priority)
+      );
 
-    insert: value => {
-      this.values.push(value);
       bubbleUp();
     },
 
-    remove: () => {
+    dequeue() {
       if (this.values.length === 0) return null;
       if (this.values.length === 1) return this.values.pop();
 
-      let [ max ] = this.values;
+      let [ highestPriority ] = this.values;
       this.values[0] = this.values.pop();
 
       bubbleDown();
-      return max;
+      return highestPriority;
     }
-  }
-};
+  }).reduce((instance, [name, fn]) => {
+    instance[name] = fn.bind(this);
+    return instance;
+  }, {});
+}
 
-module.exports = MaxBinaryHeap;
+
+module.exports = PriorityQueue;
