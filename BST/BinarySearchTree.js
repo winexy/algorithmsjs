@@ -118,10 +118,8 @@ class BinarySearchTree {
   }
 
 
-  dfs(useRecursion = true, order = BinarySearchTree.DFS_IN_ORDER) {
-    if (useRecursion)
+  dfs(order = BinarySearchTree.DFS_IN_ORDER) {
       return BinarySearchTree.dfsUseRecursion(this, order);
-    return BinarySearchTree.dfsUseIteration(this, order);
   }
 
   static dfsUseRecursion(tree, order) {
@@ -143,10 +141,6 @@ class BinarySearchTree {
           return [...left, ...right, current.value];
       }
     }
-
-  }
-
-  static dfsUseIteration(tree) {
 
   }
 
